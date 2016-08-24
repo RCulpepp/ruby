@@ -1,0 +1,34 @@
+<div class='pure-g wrapper'>
+	<div class='pure-u-3-4'></div>
+	<div class='pure-u-1-4'>
+		<form  action='/sessions/:id' method='post'>
+			<input name="authenticity_token" type="hidden" value="{{form_authenticity_token }}" />
+			<input type='hidden' value='delete' name="_method">
+			<button type='submit' class='pure-button'>Logout</button>
+		</form>
+		<a href='/ideas'>Ideas</a>
+	</div>
+	<table class='pure-u-1 pure-table'>
+		<tr>
+			<td>Name:</td>
+			<td><%= @user[:name] %></td>
+		</tr>
+		<tr>
+			<td>Alias:</td>
+			<td><%=@user[:alias]%></td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td><%=@user[:email]%></td>
+		</tr>
+		<tr>
+			<td>Posts:</td>
+			<td><%=@user.ideas.length%></td>
+		</tr>
+		<tr>
+			<td>Likes:</td>
+			<td><%=@user.likes.length%></td>
+		</tr>
+	</table>
+	
+</div>

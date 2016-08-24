@@ -1,0 +1,33 @@
+<div class='pure-g wrapper'>
+	<h2 class='pure-u-1'>Welcome!</h2>
+	<form class='pure-u-1-2 pure-form pure-form-stacked' action='/users' method='POST'>
+		<% if flash[:regisErrs] %>
+			<% flash[:regisErrs].each_pair do |type, message| %>
+				<%= type%> <%= message[0] %></p>
+			<% end %>
+		<% end %>
+		 <input name="authenticity_token" type="hidden" value="{{form_authenticity_token }}" />
+		<h3>Register</h3>
+		<label for='user[name]'>Name:</label>
+		<input type="text" name="user[name]">
+		<label for='user[alias]'>Alias:</label>
+		<input type="text" name="user[alias]">
+		<label for='user[email]'>Email:</label>
+		<input type="email" name="user[email]">
+		<label for='user[password]'>Password:</label>
+		<input type="password" name="user[password]">
+		<label for='user[password_confirmation]'>Confirm Password:</label>
+		<input type="password" name="user[password_confirmation]">
+		<button type="submit" class='pure-button'>Register</button>
+	</form>
+	<form class='pure-u-1-2 pure-form pure-form-stacked' action='/sessions' method='POST'>
+		<%= flash['loginErr'] %>
+		<input name="authenticity_token" type="hidden" value="{{form_authenticity_token }}" />
+		<h3>Login</h3>
+		<label for='email'>Email:</label>
+		<input type="email" name="email">
+		<label for='password'>Password:</label>
+		<input type="text" name="password">
+		<button type="submit" class='pure-button'>Login</button>
+	</form>
+</div>

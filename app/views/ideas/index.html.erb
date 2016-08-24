@@ -1,0 +1,33 @@
+<div class='pure-g wrapper'>
+	<h3 class='pure-u-3-4'>Hi, <%= session[:alias] %></h3>
+	<form class='pure-u-1-4' action='/sessions/:id' method='post'>
+		<input name="authenticity_token" type="hidden" value="{{form_authenticity_token }}" />
+		<input type='hidden' value='delete' name="_method">
+		<button type='submit' class='pure-button'>Logout</button>
+	</form>
+	<form class='pure-u-1' action='/ideas' method='post'>
+		<input name="authenticity_token" type="hidden" value="{{form_authenticity_token }}" />
+		<input type="text" style="width: 500px;" name="idea[content]">
+		<input type="hidden" name="idea[user_id]" value=<%= session[:id] %>>
+		<button type='submit' class='pure-button pure-button-primary'>Idea!</button>
+	</form>
+	<table class='pure-table pure-table-striped pure-u-1'>
+		<% @ideas.each do |idea| %>
+		<tr>
+			<td>
+				<a href='/users/<%= idea[:user_id] %>'><%= idea[:alias] %></a>
+				<% if session[:id] == idea[:user_id] %>
+				<form class='pure-u-1-4' action='/ideas/:id' method='post'>
+					<input name="authenticity_token" type="hidden" value="{{ form_authenticity_token }}" />
+					<input type='hidden' value='delete' name="_method">
+					<button type="submit">Delete</button>
+				</form>
+				<% end %>
+				<p><%= idea[:content] %></p>
+					<a class='pure-button' href='/likes/<%= idea[:id] %>'>Like</a>
+					<a href='/ideas/<%= idea[:id] %>'><%= idea.likes.length %></a> likes
+			</td>
+		</tr>
+		<% end %>
+	</table>
+</div>
